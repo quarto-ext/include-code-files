@@ -38,23 +38,21 @@ Once adding the filter to you page or project, the simplest way to use the filte
 
 You can still use other attributes, and classes, to control the code blocks:
 
-    ```{.c include="script.py" code-line-numbers="true"}
+    ```{.python include="script.py" code-line-numbers="true"}
     ```
 
 ### Ranges
 
-If you want to include a specific range of lines, use `startLine` and `endLine`:
+If you want to include a specific range of lines, use `start-line` and `end-line`:
 
-    ```{include="script.py" startLine=35 endLine=80}
+    ```{.python include="script.py" start-line=35 end-line=80}
     ```
-
-`start-line` and `end-line` alternatives are also recognized.
 
 ### Dedent
 
 Using the `dedent` attribute, you can have whitespaces removed on each line, where possible (non-whitespace character will not be removed even if they occur
 in the dedent area).
 
-    ```{include="script.py" dedent=4}
+    ```{.python include="script.py" dedent=4}
     ```
 
