@@ -33,7 +33,7 @@ filters:
 
 Once adding the filter to you page or project, the simplest way to use the filter is the `include` attribute
 
-    ```{include="script.py"}
+    ```{.python include="script.py"}
     ```
 
 You can still use other attributes, and classes, to control the code blocks:
