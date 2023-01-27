@@ -1,0 +1,41 @@
+---
+title: "Include Code Files"
+format:
+  html: 
+    code-fold: true
+jupyter: python3
+filters:
+  - include-code-files
+execute: 
+  echo: true
+---
+
+## `add-code-from`
+
+You can include code from a file using `add-code-from` chunk option.
+
+```{python}
+#| add-code-from: external.py
+
+# comment
+```
+
+**One very important detail to note that, you must put a random comment in code chunk so that the code chunk is not treated as empty, to make this filter work.**
+
+## `start-line` & `end-line`
+
+You can specify from which line to which line you want to include,
+
+
+```{python}
+#| add-code-from: external.py
+#| start-line: 4
+#| end-line: 5
+
+# comment
+```
+
+
+## `dedent`
+
+You can specify a line number for which whitespaces will be removed using the `dedent` option.
