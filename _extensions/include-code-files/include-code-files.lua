@@ -7,7 +7,7 @@ end
 
 -- function for reading the content of included file and including the 
 -- content
-local function source_include(filepath, startLine, endLine, dedentLine)
+local function source_include(filepath, startLine, endLine, dedentLine, lang)
   local add_source = {
     CodeBlock = function(cb)
       local content = ""
@@ -33,6 +33,11 @@ local function source_include(filepath, startLine, endLine, dedentLine)
           number = number + 1
         end 
         fh:close()
+        if lang then
+          cb.classes = {lang, "cell-code"}
+        else
+          cb.classes:insert('cell-code')
+        end
       end     
       return pandoc.CodeBlock(content, cb.attr)
     end
@@ -48,7 +53,8 @@ function Div(el)
     local startLine = el.attributes['start-line']
     local endLine = el.attributes['end-line']
     local dedent_line = el.attributes.dedent
-    local div = el:walk(source_include(filepath, startLine, endLine, dedent_line))
+    local lang = el.attributes['source-lang']
+    local div = el:walk(source_include(filepath, startLine, endLine, dedent_line, lang))
     return div
   end
 end
