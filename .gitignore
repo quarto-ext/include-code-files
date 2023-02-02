@@ -3,3 +3,6 @@
 *_files/
 /.luarc.json
 !docs/*
+.Rproj.user
+.Rhistory
+*.rproj
