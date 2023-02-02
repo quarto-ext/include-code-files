@@ -1,0 +1,3 @@
+yaml-file:
+  name: "example.yml"
+  another-random-field: "Hello!"

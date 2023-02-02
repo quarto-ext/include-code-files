@@ -1,5 +1,7 @@
 ---
 title: "Include Code Files"
+author: Shafayet Khan Shafee
+date: last-modified
 format:
   html: 
     code-fold: true
@@ -10,12 +12,17 @@ execute:
   echo: true
 ---
 
+
+> Note that, If you are rendering the quarto document using jupyter use {python} chunk to include code and on the other hand if you are rendering the quarto document using knitr (i.e. engine: knitr) then use {r} chunk to include code, Or to avoid thinking about rendering engine, jupyter or knitr, you also can follow pandoc Div approach described below.
+
+
 ## `add-code-from`
 
-You can include code from a file using `add-code-from` chunk option.
+You can include code from a file using `add-code-from` chunk option. And while using jupyter for rendering the quarto document, use `python` chunk, even though you are adding contents of different language other than python and to enable syntax highlighting correctly, use chunk option `source-lang`. (You can run `quarto pandoc --list-highlight-languages` to know for which languages, syntax highlighting is supported and use one of those in `source-lang` accordingly)
 
 ```{python}
-#| add-code-from: external.py
+#| add-code-from: test/snippets/example.yml
+#| source-lang: yml
 
 # comment
 ```
@@ -28,14 +35,57 @@ You can specify from which line to which line you want to include,
 
 
 ```{python}
-#| add-code-from: external.py
-#| start-line: 4
-#| end-line: 5
+#| add-code-from: test/snippets/capitalize.sh
+#| source-lang: bash
+#| start-line: 2
+#| end-line: 7
+#| code-line-numbers: true
+
+# comment
+```
+
+Note that, we have used `code-line-numbers: true` to add line numbers in code chunk.
+
+## `dedent`
+
+You can specify a line number for which whitespaces will be removed using the `dedent` option.
+
+
+## Don't want to use `source-lang`
+
+If you **do not** want to use `python` chunk (i.e. ````{python}`) to include content from files and **do not** want to use `source-lang` option also, you can do the following,
+
+::: {add-code-from=test/snippets/capitalize.scala start-line=1 end-line=17 code-line-numbers="true"}
+
+```{.scala}
+```
+
+:::
+
+Here we have defined all the chunk option for a pandoc div (i.e. `:::`) and used a scala chunk to add code from `capitalize.scala`.
+
+
+## filename
+
+We can use `filename` either within a python chunk or in pandoc div with `add-code-from` attribute to include a code filename.
+
+
+```{python}
+#| add-code-from: test/snippets/capitalize.js
+#| source-lang: javascript
+#| code-line-numbers: true
+#| filename: capitalize.js
 
 # comment
 ```
 
 
-## `dedent`
+::: {add-code-from=test/snippets/capitalize.lua code-line-numbers="true" filename=capitalize.lua}
 
-You can specify a line number for which whitespaces will be removed using the `dedent` option.
+```{.lua}
+```
+
+:::
+
+
+**Note that, `code-fold`-ing does not work when a filename is specified.**

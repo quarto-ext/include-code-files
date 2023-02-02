@@ -1,0 +1,91 @@
+---
+title: "Include Code Files"
+author: Shafayet Khan Shafee
+date: last-modified
+format:
+  html: 
+    code-fold: true
+engine: knitr
+filters:
+  - include-code-files
+execute: 
+  echo: true
+---
+
+
+> Note that, If you are rendering the quarto document using jupyter use {python} chunk to include code and on the other hand if you are rendering the quarto document using knitr (i.e. engine: knitr) then use {r} chunk to include code, Or to avoid thinking about rendering engine, jupyter or knitr, you also can follow pandoc Div approach described below.
+
+
+## `add-code-from`
+
+You can include code from a file using `add-code-from` chunk option. And while using knitr for rendering the quarto document, use `r` chunk, even though you are adding contents of different language other than R and to enable syntax highlighting correctly, use chunk option `source-lang`. (You can run `quarto pandoc --list-highlight-languages` to know for which languages, syntax highlighting is supported and use one of those in `source-lang` accordingly)
+
+```{r}
+#| add-code-from: test/snippets/capitalize.m
+#| source-lang: matlab
+
+# comment
+```
+
+**One very important detail to note that, you must put a random comment in code chunk so that the code chunk is not treated as empty, to make this filter work.**
+
+## `start-line` & `end-line`
+
+You can specify from which line to which line you want to include,
+
+
+```{r}
+#| add-code-from: test/snippets/capitalize.ts
+#| source-lang: typescript
+#| start-line: 1
+#| end-line: 4
+#| code-line-numbers: true
+
+# comment
+```
+
+Note that, we have used `code-line-numbers: true` to add line numbers in code chunk.
+
+## `dedent`
+
+You can specify a line number for which whitespaces will be removed using the `dedent` option.
+
+
+## Don't want to use `source-lang`
+
+If you **do not** want to use `r` chunk (i.e. ````{r}`) to include content from files and **do not** want to use `source-lang` option also, you can do the following,
+
+::: {add-code-from=test/snippets/capitalize.php start-line=1 end-line=17 code-line-numbers="true"}
+
+```{.php}
+```
+
+:::
+
+Here we have defined all the chunk option for a pandoc div (i.e. `:::`) and used a php chunk to add code from `capitalize.php`.
+
+
+## filename
+
+We can use `filename` either within a r chunk or in pandoc div with `add-code-from` attribute to include a code filename.
+
+
+```{r}
+#| add-code-from: test/snippets/fizz-buzz.rs
+#| source-lang: rust
+#| code-line-numbers: true
+#| filename: fizz-buzz.rs
+
+# comment
+```
+
+
+::: {add-code-from=test/snippets/fizz-buzz.jl code-line-numbers="true" filename=fizz-buzz.jl}
+
+```{.julia}
+```
+
+:::
+
+
+**Note that, `code-fold`-ing does not work when a filename is specified.**
