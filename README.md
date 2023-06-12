@@ -11,8 +11,7 @@ The filter is largely inspired by
 quarto add quarto-ext/include-code-files
 ```
 
-This will install the extension under the `_extensions` subdirectory.
-If you're using version control, you will want to check in this directory.
+This will install the extension under the `_extensions` subdirectory.  If you're using version control, you will want to check in this directory.  The `_extensions` directory needs to be in the same directory as your quarto code in order for quarto to be able to find the extension.
 
 ## Usage
 
