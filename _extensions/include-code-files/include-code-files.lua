@@ -62,8 +62,6 @@ local function transclude (cb)
       start = 1
     end
 
-    quarto.log.output("start: " .. start)
-
     -- set finish and skipLast based on end params
     if cb.attributes.endLine then
       finish = tonumber(cb.attributes.endLine)
@@ -80,18 +78,14 @@ local function transclude (cb)
       -- if no end specified, end at the last line
     end
 
-    quarto.log.output("finish: " .. finish)
-
     for line in fh:lines ("L")
     do
       number = number + 1
       -- if start or finish is a string, check if it exists on the current line
       if type(start) == "string" and string.find(line, start, 1, true) then
         start = number
-        quarto.log.output("convererted start to : " .. start)
       elseif type(finish) == "string" and string.find(line, finish, 1 , true) then
         finish = number
-        quarto.log.output("convererted finish to : " .. finish)
       end
 
       -- if haven't found start yet, then continue
