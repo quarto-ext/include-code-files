@@ -1,0 +1,9 @@
+project:
+  type: website
+  output-dir: .quarto
+  preview:
+    browser: true
+    watch-inputs: true
+
+website:
+  title: "Quarto + Include-Code-Files"
